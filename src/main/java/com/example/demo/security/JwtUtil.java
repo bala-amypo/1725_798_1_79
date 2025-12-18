@@ -1,5 +1,4 @@
 package com.example.demo.security;
-
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,6 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
     }
-
     public String extractEmail(String token) {
         return Jwts.parser().setSigningKey(SECRET)
                 .parseClaimsJws(token)
