@@ -1,1 +1,7 @@
-demo/src/main/java/com/example/demo/service/LocationService.java
+package com.example.demo.service;
+
+import com.example.demo.entity.User;
+
+public interface UserService {
+    User register(User user);
+}
