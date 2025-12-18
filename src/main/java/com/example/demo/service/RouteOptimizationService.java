@@ -25,7 +25,6 @@ public class RouteOptimizationService {
     }
 
     private double calculateDummyDistance(List<String> locations) {
-       n
         return locations.size() * 5.25; 
     }
 }
