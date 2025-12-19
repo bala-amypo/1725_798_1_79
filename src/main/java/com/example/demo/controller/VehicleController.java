@@ -19,4 +19,3 @@ public class VehicleController {
         return service.add(v);
     }
 }
-;''
