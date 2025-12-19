@@ -13,54 +13,34 @@ public class RouteOptimizationResult {
     @ManyToOne
     private Shipment shipment;
 
-    private Double distanceKm;
-
-    private Double fuelUsedLiters;
-
+    private Double optimizedDistanceKm;
+    private Double estimatedFuelUsage;
     private LocalDateTime generatedAt;
 
     public RouteOptimizationResult() {}
 
-    public RouteOptimizationResult(Shipment shipment, Double distanceKm, Double fuelUsedLiters, LocalDateTime generatedAt) {
+    public RouteOptimizationResult(Long id, Shipment shipment, Double optimizedDistanceKm,
+                                   Double estimatedFuelUsage, LocalDateTime generatedAt) {
+        this.id = id;
         this.shipment = shipment;
-        this.distanceKm = distanceKm;
-        this.fuelUsedLiters = fuelUsedLiters;
+        this.optimizedDistanceKm = optimizedDistanceKm;
+        this.estimatedFuelUsage = estimatedFuelUsage;
         this.generatedAt = generatedAt;
     }
 
-    public Long getId() {
-        return id;
-    }
+    // getters/setters
+    public Long getId(){ return id; }
+    public void setId(Long id){ this.id = id; }
 
-    public Shipment getShipment() {
-        return shipment;
-    }
+    public Shipment getShipment(){ return shipment; }
+    public void setShipment(Shipment shipment){ this.shipment = shipment; }
 
-    public void setShipment(Shipment shipment) {
-        this.shipment = shipment;
-    }
+    public Double getOptimizedDistanceKm(){ return optimizedDistanceKm; }
+    public void setOptimizedDistanceKm(Double optimizedDistanceKm){ this.optimizedDistanceKm = optimizedDistanceKm; }
 
-    public Double getDistanceKm() {
-        return distanceKm;
-    }
+    public Double getEstimatedFuelUsage(){ return estimatedFuelUsage; }
+    public void setEstimatedFuelUsage(Double estimatedFuelUsage){ this.estimatedFuelUsage = estimatedFuelUsage; }
 
-    public void setDistanceKm(Double distanceKm) {
-        this.distanceKm = distanceKm;
-    }
-
-    public Double getFuelUsedLiters() {
-        return fuelUsedLiters;
-    }
-
-    public void setFuelUsedLiters(Double fuelUsedLiters) {
-        this.fuelUsedLiters = fuelUsedLiters;
-    }
-
-    public LocalDateTime getGeneratedAt() {
-        return generatedAt;
-    }
-
-    public void setGeneratedAt(LocalDateTime generatedAt) {
-        this.generatedAt = generatedAt;
-    }
+    public LocalDateTime getGeneratedAt(){ return generatedAt; }
+    public void setGeneratedAt(LocalDateTime generatedAt){ this.generatedAt = generatedAt; }
 }

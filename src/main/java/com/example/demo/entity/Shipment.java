@@ -20,7 +20,6 @@ public class Shipment {
     private Location dropLocation;
 
     private Double weightKg;
-
     private LocalDate scheduledDate;
 
     public Shipment() {}
@@ -35,53 +34,22 @@ public class Shipment {
         this.scheduledDate = scheduledDate;
     }
 
-   
+    // getters & setters
+    public Long getId(){ return id; }
+    public void setId(Long id){ this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public Vehicle getVehicle(){ return vehicle; }
+    public void setVehicle(Vehicle vehicle){ this.vehicle = vehicle; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Location getPickupLocation(){ return pickupLocation; }
+    public void setPickupLocation(Location pickupLocation){ this.pickupLocation = pickupLocation; }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
+    public Location getDropLocation(){ return dropLocation; }
+    public void setDropLocation(Location dropLocation){ this.dropLocation = dropLocation; }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
+    public Double getWeightKg(){ return weightKg; }
+    public void setWeightKg(Double weightKg){ this.weightKg = weightKg; }
 
-    public Location getPickupLocation() {
-        return pickupLocation;
-    }
-
-    public void setPickupLocation(Location pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
-
-    public Location getDropLocation() {
-        return dropLocation;
-    }
-
-    public void setDropLocation(Location dropLocation) {
-        this.dropLocation = dropLocation;
-    }
-
-    public Double getWeightKg() {
-        return weightKg;
-    }
-
-    public void setWeightKg(Double weightKg) {
-        this.weightKg = weightKg;
-    }
-
-    public LocalDate getScheduledDate() {
-        return scheduledDate;
-    }
-
-    public void setScheduledDate(LocalDate scheduledDate) {
-        this.scheduledDate = scheduledDate;
-    }
+    public LocalDate getScheduledDate(){ return scheduledDate; }
+    public void setScheduledDate(LocalDate scheduledDate){ this.scheduledDate = scheduledDate; }
 }
