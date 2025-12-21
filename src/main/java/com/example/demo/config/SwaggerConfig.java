@@ -17,4 +17,4 @@ public class SwaggerConfig {
                         new Server().url("https://9196.408procr.amypo.ai/")
                 ));
         }
-}netstat -ano | findstr :8081
+}
