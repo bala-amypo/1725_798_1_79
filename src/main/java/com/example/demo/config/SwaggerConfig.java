@@ -10,19 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class SwaggerConfig {
 
-@Bean
-public WebMvcConfigurer corsConfigurer() {
-    return new WebMvcConfigurer() {
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            registry.addMapping("/**")
-                    .allowedOriginPatterns("*")
-                    .allowedMethods("*")
-                    .allowedHeaders("*");
-        }
-    };
-}
-
     // OpenAPI Config
     @Bean
     public OpenAPI api() {
@@ -33,17 +20,4 @@ public WebMvcConfigurer corsConfigurer() {
                         .description("Demo Project API Documentation"));
     }
 
-    // CORS FIX for Swagger UI
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
-                        .allowedMethods("*")
-                        .allowedHeaders("*");
-            }
-        };
     }
-}
