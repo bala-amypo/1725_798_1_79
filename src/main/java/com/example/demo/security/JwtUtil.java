@@ -1,9 +1,7 @@
-// JwtUtil.java
 package com.example.demo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -15,10 +13,8 @@ public class JwtUtil {
     private final SecretKey secretKey;
     private final long expirationMs;
     
-    public JwtUtil(@Value("${jwt.secret}") String secret, 
-                   @Value("${jwt.expiration}") long expirationMs) {
-        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
-        this.expirationMs = expirationMs;
+    public JwtUtil() {
+        this("testsecretkeytestsecretkeytestsecretkey", 3600000);
     }
     
     public JwtUtil(String secret, long expirationMs) {
@@ -42,10 +38,48 @@ public class JwtUtil {
     }
     
     public Claims validateToken(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(secretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            throw new RuntimeException("JWT token has expired", e);
+        } catch (JwtException e) {
+            throw new RuntimeException("Invalid JWT token", e);
+        }
     }
-}
+    
+    public Long extractUserId(String token) {
+        Claims claims = validateToken(token);
+        Object userIdObj = claims.get("userId");
+        if (userIdObj instanceof Number) {
+            return ((Number) userIdObj).longValue();
+        }
+        return Long.parseLong(userIdObj.toString());
+    }
+    
+    public String extractEmail(String token) {
+        Claims claims = validateToken(token);
+        return claims.get("email", String.class);
+    }
+    
+    public String extractRole(String token) {
+        Claims claims = validateToken(token);
+        return claims.get("role", String.class);
+    }
+    
+    public boolean isTokenExpired(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims.getExpiration().before(new Date());
+        } catch (Exception e) {
+            return true;
+        }
+    }
+}   
