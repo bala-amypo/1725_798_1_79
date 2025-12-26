@@ -1,0 +1,10 @@
+<suite name="Transport Route Optimization Test Suite" verbose="1">
+<listeners>
+<listener class-name="com.example.demo.TestResultListener"/>
+</listeners>
+<test name="TransportRouteOptimizationTests">
+<classes>
+<class name="com.example.demo.TransportRouteOptimizationTest"/>
+</classes>
+</test>
+</suite>
