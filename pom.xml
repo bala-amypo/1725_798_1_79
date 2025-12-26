@@ -140,11 +140,6 @@
                 </dependencies>
 
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>
-                            src/test/resources/testng.xml
-                        </suiteXmlFile>
-                    </suiteXmlFiles>
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
