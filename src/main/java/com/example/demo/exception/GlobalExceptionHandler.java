@@ -13,33 +13,38 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleNotFound(ResourceNotFoundException ex) {
+    public ResponseEntity<Map<String, Object>> handleResourceNotFound(
+            ResourceNotFoundException ex) {
+
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("error", ex.getMessage());
         body.put("status", HttpStatus.NOT_FOUND.value());
+        body.put("error", ex.getMessage());
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Object> handleBadRequest(IllegalArgumentException ex) {
+    public ResponseEntity<Map<String, Object>> handleIllegalArgument(
+            IllegalArgumentException ex) {
+
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("error", ex.getMessage());
         body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("error", ex.getMessage());
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleGeneral(Exception ex) {
+    public ResponseEntity<Map<String, Object>> handleGenericException(
+            Exception ex) {
+
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("error", "Internal Server Error");
-        body.put("details", ex.getMessage());
         body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put("error", ex.getMessage());
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
