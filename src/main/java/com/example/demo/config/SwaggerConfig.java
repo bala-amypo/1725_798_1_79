@@ -23,7 +23,7 @@ public class SwaggerConfig {
                 .servers(
                         List.of(
                                 new Server()
-                                        .url("http://localhost:8080")
+                                        .url("https://9415.pro604cr.amypo.ai/")
                                         .description("Local Server")
                         )
                 );
