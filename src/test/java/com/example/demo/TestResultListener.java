@@ -20,3 +20,4 @@ public class TestResultListener implements ITestListener {
         System.out.println(result.getMethod().getMethodName() + " - SKIP");
     }
 }
+
