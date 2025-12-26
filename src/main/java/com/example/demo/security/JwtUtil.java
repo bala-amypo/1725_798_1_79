@@ -33,8 +33,8 @@ public class JwtUtil {
 
     public Jws<Claims> validateToken(String token) {
         return Jwts.parser()
-                .verifyWith(key)        // NEW: replaces setSigningKey()
+                .verifyWith(key)
                 .build()
-                .parseSignedClaims(token);  // NEW: replaces parseClaimsJws()
+                .parseSignedClaims(token);
     }
 }

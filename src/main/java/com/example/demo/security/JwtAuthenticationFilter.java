@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             try {
-                var claims = jwtUtil.validateToken(token).getBody();
+                var claims = jwtUtil.validateToken(token).getPayload();
 
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(
@@ -43,8 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(auth);
 
-            } catch (Exception ex) {
-                // Invalid token → ignore, security will block if needed
+            } catch (Exception ignored) {
             }
         }
 
