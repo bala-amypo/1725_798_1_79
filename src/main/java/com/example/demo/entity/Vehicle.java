@@ -3,63 +3,72 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "vehicles")
+@Table(
+    name = "vehicles",
+    uniqueConstraints = @UniqueConstraint(columnNames = "vehicleNumber")
+)
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String model;
+    @Column(nullable = false)
+    private String vehicleNumber;
 
-    private String registrationNumber;
+    @Column(nullable = false)
+    private Double capacityKg;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @Column(nullable = false)
+    private Double fuelEfficiency;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Vehicle() {
-        // No-args constructor
-    }
+    public Vehicle() {}
 
-    public Vehicle(Long id, String model, String registrationNumber, User user) {
+    public Vehicle(Long id, String vehicleNumber, Double capacityKg,
+                   Double fuelEfficiency, User user) {
         this.id = id;
-        this.model = model;
-        this.registrationNumber = registrationNumber;
+        this.vehicleNumber = vehicleNumber;
+        this.capacityKg = capacityKg;
+        this.fuelEfficiency = fuelEfficiency;
         this.user = user;
     }
 
-    // Getters and Setters
+    public static Builder builder() { return new Builder(); }
 
-    public Long getId() {
-        return id;
+    public static class Builder {
+        private Long id;
+        private String vehicleNumber;
+        private Double capacityKg;
+        private Double fuelEfficiency;
+        private User user;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder vehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; return this; }
+        public Builder capacityKg(Double capacityKg) { this.capacityKg = capacityKg; return this; }
+        public Builder fuelEfficiency(Double fuelEfficiency) { this.fuelEfficiency = fuelEfficiency; return this; }
+        public Builder user(User user) { this.user = user; return this; }
+
+        public Vehicle build() {
+            return new Vehicle(id, vehicleNumber, capacityKg, fuelEfficiency, user);
+        }
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getModel() {
-        return model;
-    }
+    public String getVehicleNumber() { return vehicleNumber; }
+    public void setVehicleNumber(String vehicleNumber) { this.vehicleNumber = vehicleNumber; }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+    public Double getCapacityKg() { return capacityKg; }
+    public void setCapacityKg(Double capacityKg) { this.capacityKg = capacityKg; }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
+    public Double getFuelEfficiency() { return fuelEfficiency; }
+    public void setFuelEfficiency(Double fuelEfficiency) { this.fuelEfficiency = fuelEfficiency; }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }
